@@ -1,0 +1,34 @@
+Powered by Dark Sky
+
+<script>
+	
+
+	// Get location of the user and 
+	if (navigator.geolocation) {
+  		navigator.geolocation.getCurrentPosition(function(position) {
+    	
+  		//Store latitude and longitude as variables 
+
+    	var latitude = position.coords.latitude;
+    	var longitude = position.coords.longitude;
+    	var celsius = 0;
+
+    	// Connect to the weather API, and call information about the weather
+    	 $.getJSON("https://api.darksky.net/forecast/c9a3b229e08f5cfa366bd2a81e1d353f/" + latitude + "," + longitude + "?exclude=minutely,hourly,daily,alerts,flags?units=si", function(data) {
+
+    	 	console.log(data);
+    	 	
+    	 });
+
+  		});
+	}
+
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+// https://api.darksky.net/forecast/c9a3b229e08f5cfa366bd2a81e1d353f/37.8267,-122.4233exclude=minutely,hourly,daily,alerts,flags
+
+// Store celsius temperature in one variable, convert to fahrenheit and store in the fahrenheit variable
+// Update the DOM to show a weather background, and display the weather
+// Create a toggle button to switch between fahrenheit/celsius by replacing the information box with the corresponding variable
