@@ -14,11 +14,19 @@ Powered by Dark Sky
     	var celsius = 0;
 
     	// Connect to the weather API, and call information about the weather
-    	 $.getJSON("https://api.darksky.net/forecast/c9a3b229e08f5cfa366bd2a81e1d353f/" + latitude + "," + longitude + "?exclude=minutely,hourly,daily,alerts,flags?units=si", function(data) {
-
+    	 $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&units=metric?id=524901&APPID=5312e363245633c9e9b36621e600d7d5", function(data) {
     	 	console.log(data);
-    	 	
+    	 	console.log(data.weather[0].description);
+    	 	console.log(data.main.temp);
+    	 	console.log(data.weather[0].icon);
+    	 	var celsius = data.main.temp;
+
     	 });
+
+    	 // Store celsius temperature in one variable, convert to fahrenheit and store in the fahrenheit variable
+
+    	 var fahrenheit = ((celsius * 9)/5 + 32)
+
 
   		});
 	}
@@ -27,8 +35,7 @@ Powered by Dark Sky
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-// https://api.darksky.net/forecast/c9a3b229e08f5cfa366bd2a81e1d353f/37.8267,-122.4233exclude=minutely,hourly,daily,alerts,flags
 
-// Store celsius temperature in one variable, convert to fahrenheit and store in the fahrenheit variable
 // Update the DOM to show a weather background, and display the weather
 // Create a toggle button to switch between fahrenheit/celsius by replacing the information box with the corresponding variable
+// Adapt icons from https://openweathermap.org/weather-conditions
