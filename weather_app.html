@@ -10,14 +10,34 @@
 	</head>
 	<body>
 	
-	<div id="gradient_back">
+
+	<div class="gradient_back">
 		<div id="loading_content">
 		<span class="cursive">Fetching weather</span>
 		<p>Just fetching your local weather information...</p>
 		<p>Please allow the browser permission to share your location to continue.</p>
 		</div>
+	</div>	
+
+
+	<div class="gradient_2">
+		<div id="weather_forecast">
+			<span class="cursive wordmark">Weather station</span>
+			<div id="forecast">
+				<img id="weather_icon" src="img/01d.png" width="250px" /><br/>
+				<div id="temperature">25°C</div><br />
+				<div id="city">Sydney, Australia</div>
+			</div>
+			<div id="temperature_toggle">
+				<div id="toggle_celsius">°C </div>
+				<div id="toggle_fahrenheit">°F</div>
+			</div>
+		</div>
 	</div>
 
+	<div class="night_gradient"></div>
+	<div class="sunny_gradient"></div>
+	<div class="cloudy_gradient"></div>
 
 <script>
 	
@@ -31,29 +51,69 @@
     	var latitude = position.coords.latitude;
     	var longitude = position.coords.longitude;
     	var celsius = 0;
+    	var fahrenheit = 0;
 
     	// Connect to the weather API, and call information about the weather
     	 $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&units=metric?id=524901&APPID=5312e363245633c9e9b36621e600d7d5", function(data) {
     	 	console.log(data);
-    	 	console.log(data.weather[0].description);
-    	 	console.log(data.main.temp);
-    	 	console.log(data.weather[0].icon);
-    	 	var celsius = data.main.temp;
+    	 	var description = data.weather[0].description;
+    	 	var icon = data.weather[0].icon;
+
+    	 	// Store celsius temperature in one variable, convert to fahrenheit and store in the fahrenheit variable
+    	 	celsius = Math.floor(300 - data.main.temp);
+    	 	fahrenheit = ((celsius * 9)/5 + 32)
+
+    	 	// Update the DOM to show a weather icon, and display the weather
+
+    	 	document.getElementById("temperature").innerHTML = celsius + "°C";
+    	 	document.getElementById("city").innerHTML = description;
+    	 	document.getElementById("weather_icon").src = "img/" + icon + ".png";
+
+    	 	// Fade in colour background
+
+    	 	switch (icon) {
+    	 		case "01d":
+    	 		case "02d":
+    	 		case "10d":
+    	 			document.getElementsByClassName("sunny_gradient")[0].style.opacity = "1";
+    	 			break;
+    	 		case "03d":
+    	 		case "04d":
+    	 		case "09d":
+    	 		case "11d":
+    	 		case "13d":
+    	 		case "50d":
+    	 			document.getElementsByClassName("cloudy_gradient")[0].style.opacity = "1";
+    	 			break;
+    	 		default: 
+    	 			document.getElementsByClassName("night_gradient")[0].style.opacity = "1";
+    	 	}
+
+    	 	// Fade in content
+
+    	 	document.getElementsByClassName("gradient_2")[0].style.opacity = "1";
+    	 });
+
+    	 // Create a toggle button to switch between fahrenheit/celsius by replacing the information box with the corresponding variable
+
+    	 document.getElementById("toggle_celsius").addEventListener("click", function(){
+    	 	document.getElementById("temperature").innerHTML = celsius + "°C";
+    	 	document.getElementById("toggle_celsius").setAttribute("style", "background-color: rgba(250, 250, 250, 0.8);");
+    	 	document.getElementById("toggle_fahrenheit").setAttribute("style", "background-color: rgba(250, 250, 250, 0.6);");
 
     	 });
 
-    	 // Store celsius temperature in one variable, convert to fahrenheit and store in the fahrenheit variable
-
-    	 var fahrenheit = ((celsius * 9)/5 + 32)
-
+    	 document.getElementById("toggle_fahrenheit").addEventListener("click", function(){
+    	 	document.getElementById("temperature").innerHTML = fahrenheit + "°F";
+    	 	document.getElementById("toggle_celsius").setAttribute("style", "background-color: rgba(250, 250, 250, 0.6);");
+    	 	document.getElementById("toggle_fahrenheit").setAttribute("style", "background-color: rgba(250, 250, 250, 0.8);");
+    	 });
 
   		});
 	}
 
 
-// Update the DOM to show a weather background, and display the weather
-// Create a toggle button to switch between fahrenheit/celsius by replacing the information box with the corresponding variable
-// Adapt icons from https://openweathermap.org/weather-conditions
+
 
 </script>
 
