@@ -43,9 +43,9 @@
 }
 
 .cloudy_gradient {
-	background: #56CCF2;  /* fallback for old browsers */
-	background: -webkit-linear-gradient(to right, #56CCF2, #2F80ED);  /* Chrome 10-25, Safari 5.1-6 */
-	background: linear-gradient(to right, #56CCF2, #2F80ED); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background: #BDC3C7;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #BDC3C7, #6C7984);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #BDC3C7, #6C7984); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 	position: absolute;
     top: 0px;
     left: 0px;
@@ -117,7 +117,7 @@ body {
 	padding: 0px 0px;
 	font-size: 16px;
 	position: absolute;
-	top: 20px;
+	top: 30px;
 	right: 20px;
 	cursor: pointer;
 }
